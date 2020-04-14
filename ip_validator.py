@@ -5,11 +5,10 @@ import re
 
 def is_valid_ipv4(ip):
     m = re.match(r'^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$', ip)
-    is_valid_num = all(map(lambda x: (not x.startswith('0') if len(x) >= 2 else True)
-                                      and (0 <= int(x) <=255),
-                           m.groups()))
-    return bool(m) and is_valid_num
-    
+    return bool(m) and all(map(lambda x: (not x.startswith('0') if len(x) >= 2 else True)
+                                          and (0 <= int(x) <=255),
+                               m.groups()))
+
 
 def is_valid_netmask(ip):
     if is_valid_ipv4(ip):
